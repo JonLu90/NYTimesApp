@@ -4,9 +4,9 @@ target 'NYTimesProject' do
   use_frameworks!
 
   # Pods for NYTimesProject
-    pod 'Moya'
+    pod 'Moya', '9.0.0'
     pod 'ObjectMapper', '~> 2.2'
-    pod 'SnapKit', '~> 4.0.0'
+    pod 'SnapKit', '~> 3.0'
     pod 'SDWebImage', '~> 4.0'
 
 
