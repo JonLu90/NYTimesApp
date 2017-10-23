@@ -17,7 +17,7 @@ class Story: Mappable{
     var abstract: String?
     var publishedDate: String?
     var shortURL: String?
-    var standardThumbnailURL: String?
+    var thumbnailURL: String?
     
     required init?(map: Map) {}
     

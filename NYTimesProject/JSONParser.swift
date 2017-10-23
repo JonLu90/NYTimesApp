@@ -13,6 +13,6 @@ struct JSONParser {
     
     static func parseStandardThumbnail(dic: [String: Any]) -> String? {
         let json = JSON(dic)
-        return json["multimedia"][0]["url"].string
+        return json["multimedia"][1]["url"].string
     }
 }
