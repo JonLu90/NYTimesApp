@@ -9,6 +9,7 @@ target 'NYTimesProject' do
     pod 'SnapKit', '~> 3.0'
     pod 'SDWebImage', '~> 4.0'
     pod 'EZSwipeController'
+    pod 'SwiftyJSON'
 
   target 'NYTimesProjectTests' do
     inherit! :search_paths
