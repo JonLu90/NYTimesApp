@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>EZSwipeController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Moya.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,17 +57,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0AB1BAE6275A29116A85D9211BB2592A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>1C37510D3BADB0FEB2AFE88F555DFBFD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>69544B83B2C89EF6AE44DD4E0208A1C9</key>
+		<key>2696CC50F8CEE97F2F9C6694C6E7D402</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3DA30DE183B4A4EDA2181B7EBD959C54</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C2996B11FF5F83483A6DD582C5296F6E</key>
+		<key>A4D32A6C8AC4E079CC2DD1B9A54C5A75</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B243D8AB5967F7ED44BF60E32432C89F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
