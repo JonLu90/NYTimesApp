@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PCLBlurEffectAlert.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-NYTimesProject.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,22 +67,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1114ABE9374BDADE90E56702CC6D9885</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>1C37510D3BADB0FEB2AFE88F555DFBFD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>356BB8C820CD96BBC8F3C92DB83B4616</key>
+		<key>3DA30DE183B4A4EDA2181B7EBD959C54</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3DA30DE183B4A4EDA2181B7EBD959C54</key>
+		<key>48D0DB194C1C9031A7E1F0A22707CE05</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,22 +92,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>86232D909DDC600F8AB88986A7B436F4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A5AB04CE06CDA8A5C29ACBC972DA1568</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A83E91220FF6485B2FD7D561F914AD29</key>
+		<key>C89F910D42362D14F001C51CCFB0C053</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>CD6C9FB6B052E1CF663F8A56041EA163</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D560CD365CD24C9304C7E1ED1B37629B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D99C4DD63EB9025B61630EEDFEE5629C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

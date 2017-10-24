@@ -105,7 +105,8 @@ class NYTHomeTopStoriesViewController: UIViewController {
             print("new : \(self.stories.count)")
         }) {
             (error) in
-            print(error)
+            print("error is:")
+            print(error.errorDescription)
         }
     }
 }
@@ -139,5 +140,9 @@ extension NYTHomeTopStoriesViewController: UICollectionViewDelegate, UICollectio
         let url = URL(string: stories[indexPath.row].shortURL!)!
         let webViewController = NYTWebViewController(url: url)
         self.navigationController?.pushViewController(webViewController, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }

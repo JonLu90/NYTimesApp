@@ -10,6 +10,7 @@ target 'NYTimesProject' do
     pod 'SDWebImage', '~> 4.0'
     pod 'EZSwipeController'
     pod 'SwiftyJSON'
+    pod "PCLBlurEffectAlert"
 
   target 'NYTimesProjectTests' do
     inherit! :search_paths

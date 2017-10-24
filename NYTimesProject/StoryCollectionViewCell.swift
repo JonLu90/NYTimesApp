@@ -66,6 +66,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(dateLabel)
         contentView.addSubview(thumbnailImageView)
+        contentView.addSubview(lineView)
     }
     
     func setupConstraints() {
@@ -95,9 +96,15 @@ class StoryCollectionViewCell: UICollectionViewCell {
         }
         dateLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(4)
-            make.bottom.equalToSuperview().offset(-4)
+            make.bottom.equalToSuperview().offset(-8)
             make.width.equalTo(self.contentView.snp.width).multipliedBy(1.0/8.0)
             make.height.equalTo(self.contentView.snp.height).multipliedBy(1.0/15.0)
+        }
+        lineView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(8)
+            make.right.equalToSuperview().offset(-8)
+            make.bottom.equalToSuperview().offset(-4)
+            make.height.equalTo(2)
         }
     }
     
@@ -144,5 +151,11 @@ class StoryCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.backgroundColor = UIColor.blue
         return imageView
+    }()
+    
+    let lineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.gray
+        return view
     }()
 }

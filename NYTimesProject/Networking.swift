@@ -26,4 +26,8 @@ struct NetworkService {
             }
         }
     }
+    
+//    static func isConnectedToInternet() -> Bool {
+//
+//    }
 }

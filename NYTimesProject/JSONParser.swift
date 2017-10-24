@@ -6,8 +6,8 @@
 //  Copyright © 2017 JonLu. All rights reserved.
 //
 
-import Foundation
 import SwiftyJSON
+
 
 struct JSONParser {
     
