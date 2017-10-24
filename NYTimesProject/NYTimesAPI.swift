@@ -14,8 +14,10 @@ let myAPIKey = "a353de8ce48a47b9b32f7d2887ad2fb7"
 
 enum NYTimesTopStoriesAPI {
     case topStoriesHome
-    case topStoriesWorld
     // add more for Top Stories API here
+    // for example:
+    // case topStoriesWorld
+
 }
 
 enum NYTimesSearchAPI {
@@ -74,8 +76,10 @@ extension NYTimesTopStoriesAPI: TargetType {
         switch self {
         case .topStoriesHome:
             return "home.json"
-        case .topStoriesWorld:
-            return "world.json"
+            // add more API here
+            // for example:
+            // case .topStoriesWorld:
+            //    return "world.json"
         }
     }
     

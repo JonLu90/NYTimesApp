@@ -15,12 +15,12 @@ class NYTSearchViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        fetchQueryData(query: "USA Russia")
+        fetchQueryData(query: "google", page: 10)
     }
     
-    func fetchQueryData(query: String) {
+    func fetchQueryData(query: String, page: Int) {
         
-        NetworkService.queryRequest(target: .articleSearch(["q": query]), success: { (response) in
+        NetworkService.queryRequest(target: .articleSearch(["q": query, "page": page]), success: { (response) in
             print(try! response.mapJSON())
         }) { (error) in
             print(error)
