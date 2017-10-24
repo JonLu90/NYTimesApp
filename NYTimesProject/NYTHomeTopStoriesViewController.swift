@@ -104,9 +104,13 @@ class NYTHomeTopStoriesViewController: UIViewController {
             }
             print("new : \(self.stories.count)")
         }) {
+            
             (error) in
-            print("error is:")
-            print(error.errorDescription)
+            print(error)
+            UtilityFunctions.showAlert(error.errorDescription!)
+            if self.refreshControl.isRefreshing {
+                self.refreshControl.endRefreshing()
+            }
         }
     }
 }
