@@ -34,9 +34,6 @@ extension NYTSwipeableBaseViewController: EZSwipeControllerDataSource {
         let worldTopStoriesViewController = NYTWorldTopStoriesViewController()
         let worldTopStoriesNavigationController = UINavigationController(rootViewController: worldTopStoriesViewController)
         
-        let greenVC = NYTTechnologyTopStoriesViewController()
-        greenVC.view.backgroundColor = UIColor.green
-        
-        return [homeTopStoriesNavigationController, worldTopStoriesNavigationController, greenVC]
+        return [homeTopStoriesNavigationController, worldTopStoriesNavigationController]
     }
 }
