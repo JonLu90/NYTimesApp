@@ -9,7 +9,7 @@
 import Moya
 
 
-struct NetworkAdapter {
+struct NetworkService {
     
     static let provider = MoyaProvider<NYTimesAPI>()
     
@@ -18,7 +18,9 @@ struct NetworkAdapter {
         provider.request(target) { (result) in
             switch result {
             case .success(let response):
-                successCallback(response)
+                if response.statusCode >= 200 && response.statusCode <= 300 {
+                    successCallback(response)
+                }
             case .failure(let error):
                 failureCallback(error)
             }

@@ -13,7 +13,7 @@ class NYTHomeViewController: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = UIColor.blue
         
-        NetworkAdapter.request(target: .topStoriesHome, success: { (response) in
+        NetworkService.request(target: .topStoriesHome, success: { (response) in
             print(try! response.mapJSON())
         }) { (error) in
             print(error)

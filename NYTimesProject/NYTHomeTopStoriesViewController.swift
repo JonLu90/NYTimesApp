@@ -12,6 +12,9 @@ import UIKit
 class NYTHomeTopStoriesViewController: UIViewController {
     
     var stories = [Story]()
+    var storyMetaData = StoryMetaData()
+    
+    let refreshControl = UIRefreshControl()
     
     let storyCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -21,42 +24,16 @@ class NYTHomeTopStoriesViewController: UIViewController {
     let cellIdentifier = "storyCollectionViewCell"
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         setupUI()
         configure()
         
-        // async call!
-        NetworkAdapter.request(target: .topStoriesHome, success: { (response) in
-            
-            let json = try! response.mapJSON() as! [String: Any]
-            let results = json["results"] as! [[String: Any]]
-                
-            for result in results {
-                let story = Story(JSON: result)
-                // parse standard thumbnail
-                if let url = JSONParser.parseStandardThumbnail(dic: result) {
-                    story?.thumbnailURL = url
-                }
-                self.stories.append(story!)
-            }
-            
-            for ele in self.stories {
-                print(ele.shortURL)
-            }
-            print(self.stories.count)
-            self.storyCollectionView.reloadData()
-            
-        }) { (error) in
-            print(error)
-        }
+        fetchStoryData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        print("Home")
     }
     
     override func viewDidLayoutSubviews() {
@@ -83,6 +60,53 @@ class NYTHomeTopStoriesViewController: UIViewController {
         storyCollectionView.register(StoryCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
         storyCollectionView.delegate = self
         storyCollectionView.dataSource = self
+        if #available(iOS 10.0, *) {
+            storyCollectionView.refreshControl = refreshControl
+        }
+        refreshControl.addTarget(self, action: #selector(fetchStoryData), for: .valueChanged)
+        refreshControl.tintColor = UIColor.gray
+    }
+    
+    func fetchStoryData() {
+        // async call!
+        NetworkService.request(target: .topStoriesHome, success: { [unowned self](response) in
+            
+            let json = try! response.mapJSON() as! [String: Any]
+            let results = json["results"] as! [[String: Any]]
+            
+            let lastUpdateTimeStamp = JSONParser.parseLastUpdateTimeStamp(dic: json)
+            
+            print("old: \(self.stories.count)")
+            
+            // if server hasn't updated to newest data, DO NOT update
+            if self.storyMetaData.lastUpdated != nil && self.storyMetaData.lastUpdated == lastUpdateTimeStamp {
+                self.refreshControl.endRefreshing()
+                return
+            }
+            
+            // parse story meta data
+            self.storyMetaData = JSONParser.parseStoryMetaData(dic: json)
+            self.refreshControl.attributedTitle = NSAttributedString(string: "Last update: \(self.storyMetaData.lastUpdated!)")
+            
+            self.stories = [Story]()
+            for result in results {
+                let story = Story(JSON: result)
+                // parse thumbnail url
+                if let url = JSONParser.parseStandardThumbnail(dic: result) {
+                    story?.thumbnailURL = url
+                }
+                self.stories.append(story!)
+            }
+            
+            self.storyCollectionView.reloadData()
+            if self.refreshControl.isRefreshing {
+                self.refreshControl.endRefreshing()
+            }
+            print("new : \(self.stories.count)")
+        }) {
+            (error) in
+            print(error)
+        }
     }
 }
 

@@ -15,4 +15,22 @@ struct JSONParser {
         let json = JSON(dic)
         return json["multimedia"][1]["url"].string
     }
+    
+    static func parseStoryMetaData(dic: [String: Any]) -> StoryMetaData {
+        
+        let storyMetaData = StoryMetaData()
+        let json = JSON(dic)
+        
+        storyMetaData.status = json["status"].string
+        storyMetaData.section = json["section"].string
+        storyMetaData.lastUpdated = json["last_updated"].string
+        storyMetaData.numberOfResults = json["num_results"].int
+        
+        return storyMetaData
+    }
+    
+    static func parseLastUpdateTimeStamp(dic: [String: Any]) -> String {
+        let json = JSON(dic)
+        return json["last_updated"].string!
+    }
 }

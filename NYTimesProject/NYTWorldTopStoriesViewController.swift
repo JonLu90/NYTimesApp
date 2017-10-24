@@ -28,7 +28,7 @@ class NYTWorldTopStoriesViewController: UIViewController {
         setupUI()
         configure()
         // async call!
-        NetworkAdapter.request(target: .topStoriesWorld, success: { (response) in
+        NetworkService.request(target: .topStoriesWorld, success: { (response) in
             
             let json = try! response.mapJSON() as! [String: Any]
             let results = json["results"] as! [[String: Any]]
@@ -42,10 +42,6 @@ class NYTWorldTopStoriesViewController: UIViewController {
                 self.stories.append(story!)
             }
             
-            for ele in self.stories {
-                print(ele.shortURL)
-            }
-            print(self.stories.count)
             self.storyCollectionView.reloadData()
             
         }) { (error) in
