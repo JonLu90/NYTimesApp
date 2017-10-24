@@ -15,6 +15,7 @@ let myAPIKey = "a353de8ce48a47b9b32f7d2887ad2fb7"
 enum NYTimesAPI {
     
     case topStoriesHome
+    case topStoriesWorld
 }
 
 extension NYTimesAPI: TargetType {
@@ -27,7 +28,10 @@ extension NYTimesAPI: TargetType {
         switch self {
         case .topStoriesHome:
             return "home.json"
+        case .topStoriesWorld:
+            return "world.json"
         }
+        
     }
     
     var method: Moya.Method {

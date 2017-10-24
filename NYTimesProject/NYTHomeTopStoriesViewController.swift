@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class NYTHomeTopStoriesViewController: UIViewController {
     
     var stories = [Story]()
@@ -42,8 +43,7 @@ class NYTHomeTopStoriesViewController: UIViewController {
             }
             
             for ele in self.stories {
-                print(ele.abstract)
-                print(ele.thumbnailURL)
+                print(ele.shortURL)
             }
             print(self.stories.count)
             self.storyCollectionView.reloadData()
@@ -108,5 +108,12 @@ extension NYTHomeTopStoriesViewController: UICollectionViewDelegate, UICollectio
         else {
             return StoryCollectionViewCell()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let url = URL(string: stories[indexPath.row].shortURL!)!
+        let webViewController = NYTWebViewController(url: url)
+        self.navigationController?.pushViewController(webViewController, animated: true)
     }
 }

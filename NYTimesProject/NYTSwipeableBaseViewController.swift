@@ -14,20 +14,29 @@ class NYTSwipeableBaseViewController: EZSwipeController {
     
     override func setupView() {
         datasource = self
+        navigationBarShouldNotExist = true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor.white
     }
 }
 
 extension NYTSwipeableBaseViewController: EZSwipeControllerDataSource {
+    
     func viewControllerData() -> [UIViewController] {
-        let redVC = NYTHomeTopStoriesViewController()
-        redVC.view.backgroundColor = UIColor.red
         
-        let blueVC = NYTWorldTopStoriesViewController()
-        blueVC.view.backgroundColor = UIColor.blue
+        let homeTopStoriesViewController = NYTHomeTopStoriesViewController()
+        let homeTopStoriesNavigationController = UINavigationController(rootViewController: homeTopStoriesViewController)
+        
+        let worldTopStoriesViewController = NYTWorldTopStoriesViewController()
+        let worldTopStoriesNavigationController = UINavigationController(rootViewController: worldTopStoriesViewController)
         
         let greenVC = NYTTechnologyTopStoriesViewController()
         greenVC.view.backgroundColor = UIColor.green
         
-        return [redVC, blueVC, greenVC]
+        return [homeTopStoriesNavigationController, worldTopStoriesNavigationController, greenVC]
     }
 }
