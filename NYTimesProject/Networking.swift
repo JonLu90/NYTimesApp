@@ -11,9 +11,9 @@ import Moya
 
 struct NetworkService {
     
-    static let provider = MoyaProvider<NYTimesAPI>()
-    
-    static func request(target: NYTimesAPI, success successCallback: @escaping (Response) -> Void, failure failureCallback: @escaping (MoyaError) -> Void) {
+    static func request(target: NYTimesTopStoriesAPI, success successCallback: @escaping (Response) -> Void, failure failureCallback: @escaping (MoyaError) -> Void) {
+        
+        let provider = MoyaProvider<NYTimesTopStoriesAPI>()
         
         provider.request(target) { (result) in
             switch result {
@@ -27,7 +27,19 @@ struct NetworkService {
         }
     }
     
-//    static func isConnectedToInternet() -> Bool {
-//
-//    }
+    static func queryRequest(target: NYTimesSearchAPI, success successCallback: @escaping (Response) -> Void, failure failureCallback: @escaping (MoyaError) -> Void) {
+        
+        let provider = MoyaProvider<NYTimesSearchAPI>()
+        
+        provider.request(target) { (result) in
+            switch result {
+            case .success(let response):
+                if response.statusCode >= 200 && response.statusCode <= 300 {
+                    successCallback(response)
+                }
+            case .failure(let error):
+                failureCallback(error)
+            }
+        }
+    }
 }

@@ -34,6 +34,9 @@ extension NYTSwipeableBaseViewController: EZSwipeControllerDataSource {
         let worldTopStoriesViewController = NYTWorldTopStoriesViewController()
         let worldTopStoriesNavigationController = UINavigationController(rootViewController: worldTopStoriesViewController)
         
-        return [homeTopStoriesNavigationController, worldTopStoriesNavigationController]
+        let searchViewController = NYTSearchViewController()
+        let searchViewNavigationController = UINavigationController(rootViewController: searchViewController)
+        
+        return [homeTopStoriesNavigationController, worldTopStoriesNavigationController, searchViewNavigationController]
     }
 }
