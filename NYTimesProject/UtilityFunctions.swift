@@ -21,4 +21,18 @@ struct UtilityFunctions {
         
         alert.show()
     }
+    
+    static func convertDateFormat(_ dateString: String) -> String {
+        
+        let dateFormatterFrom = DateFormatter()
+        dateFormatterFrom.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        
+        let dateFormatterResult = DateFormatter()
+        dateFormatterResult.dateFormat = "MMM dd"
+        
+        let date = dateFormatterFrom.date(from: dateString)!
+        let resultDateString = dateFormatterResult.string(from: date)
+        
+        return resultDateString
+    }
 }

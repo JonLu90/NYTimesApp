@@ -36,6 +36,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(headlineLabel)
         contentView.addSubview(snippetLabel)
         contentView.addSubview(dateLabel)
+        contentView.addSubview(lineView)
     }
     
     func setupConstraints() {
@@ -61,15 +62,23 @@ class SearchCollectionViewCell: UICollectionViewCell {
         dateLabel.snp.makeConstraints { (make) in
             make.top.equalTo(snippetLabel.snp.bottom).offset(2)
             make.left.equalToSuperview().offset(4)
-            make.bottom.equalToSuperview().offset(-4)
+            make.bottom.equalToSuperview().offset(-6)
             make.width.equalTo(contentView.snp.width).multipliedBy(1.0/4.0)
+        }
+        lineView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(4)
+            make.right.equalToSuperview().offset(-4)
+            make.height.equalTo(2)
+            make.bottom.equalToSuperview().offset(0)
         }
     }
     
     func configureCell(story: SearchStory) {
         headlineLabel.text = story.headline
         snippetLabel.text = story.snippet
-        dateLabel.text = story.date
+        if let date = story.date {
+            dateLabel.text = UtilityFunctions.convertDateFormat(date)
+        }
         // some video news can be without thumbnail url
         // for those display default nytimes logo
         if let urlString = story.thumbnailURL {
@@ -89,18 +98,35 @@ class SearchCollectionViewCell: UICollectionViewCell {
     let headlineLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = UIColor.red
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .left
+        label.minimumScaleFactor = 0.1
         return label
     }()
     
     let snippetLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = UIColor.red
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .left
+        label.minimumScaleFactor = 0.1
         return label
     }()
     
     let dateLabel: UILabel = {
         let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.1
+        label.textAlignment = .center
         label.backgroundColor = UIColor.red
         return label
+    }()
+    
+    let lineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.gray
+        return view
     }()
 }

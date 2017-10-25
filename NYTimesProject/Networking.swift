@@ -26,7 +26,8 @@ struct NetworkService {
             }
         }
     }
-    
+    // if clearQueryFlag is set to true
+    // which means by default user type a new query
     static func queryRequest(target: NYTimesSearchAPI, success successCallback: @escaping (Response) -> Void, failure failureCallback: @escaping (MoyaError) -> Void) {
         
         let provider = MoyaProvider<NYTimesSearchAPI>()

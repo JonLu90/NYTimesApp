@@ -45,21 +45,25 @@ class NYTSearchViewController: UIViewController {
             
             let json = try! response.mapJSON() as! [String: Any]
             let results = JSONParser.parseSearchResults(dic: json)
-            print("result number: \(results.count)")
             
             // map data model
+            // and insert data into story array
+            // but before fetch new query data
+            // clear story array first
+            
+            self.stories = []
             for result in results {
                 let story = SearchStory(JSON: result)!
                 story.thumbnailURL = JSONParser.parseSearchStoryThumbnail(dic: result)
                 story.headline = JSONParser.parseSearchStoryHeadline(dic: result)
                 self.stories.append(story)
-                print(story.thumbnailURL)
             }
             self.searchCollectionView.reloadData()
             print("story inside async: \(self.stories.count)")
             print("query inside async: \(self.query)")
             
         }) { (error) in
+            UtilityFunctions.showAlert(error.errorDescription!)
             print(error)
         }
     }
@@ -136,10 +140,28 @@ extension NYTSearchViewController: UICollectionViewDelegate, UICollectionViewDat
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            if let url =  URL(string: stories[indexPath.row].webURL!) {
+                let webViewController = NYTWebViewController(url: url)
+                self.navigationController?.pushViewController(webViewController, animated: true)
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        // TODO
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        self.query =  textField.text!
         fetchQueryData(query: self.query, page: 0)
+        self.query =  textField.text!
+        self.page = 0
         return false
     }
 }

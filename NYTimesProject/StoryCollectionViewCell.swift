@@ -12,7 +12,7 @@ import SDWebImage
 
 
 class StoryCollectionViewCell: UICollectionViewCell {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -35,27 +35,13 @@ class StoryCollectionViewCell: UICollectionViewCell {
         self.sectionLabel.text = story.section
         self.subSectionLabel.text = story.subsection
         self.titleLabel.text = story.title
-        self.dateLabel.text = convertDateFormat(story.publishedDate!)
+        self.dateLabel.text = UtilityFunctions.convertDateFormat(story.publishedDate!)
         
         if let imageURL: String = story.thumbnailURL {
             self.thumbnailImageView.sd_setImage(with: URL(string: imageURL), placeholderImage: UIImage(named: "news_placeholder"), options: [.continueInBackground, .progressiveDownload], completed: nil)
         } else {
             self.thumbnailImageView.image = UIImage(named: "nytimes_black")
         }
-    }
-    
-    func convertDateFormat(_ dateString: String) -> String {
-        
-        let dateFormatterFrom = DateFormatter()
-        dateFormatterFrom.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        
-        let dateFormatterResult = DateFormatter()
-        dateFormatterResult.dateFormat = "MMM dd"
-        
-        let date = dateFormatterFrom.date(from: dateString)!
-        let resultDateString = dateFormatterResult.string(from: date)
-        
-        return resultDateString
     }
     
     func setupUI() {
