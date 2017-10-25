@@ -159,10 +159,9 @@ extension NYTSearchViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        // TODO
+
         if indexPath.section == 1 {
             if indexPath.row == self.stories.count-1 || indexPath.row == self.stories.count-2 {
-                print("this is the end!")
                 fetchQueryData(query: self.query, page: self.page, clearQueryFlag: false)
             }
         }

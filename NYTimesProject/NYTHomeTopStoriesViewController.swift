@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SnapKit
 
 class NYTHomeTopStoriesViewController: UIViewController {
     
@@ -21,6 +21,13 @@ class NYTHomeTopStoriesViewController: UIViewController {
         return collectionView
     }()
     
+    let topBannerImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "top_banner")
+        return imageView
+    }()
+    
     let cellIdentifier = "storyCollectionViewCell"
     
     override func viewDidLoad() {
@@ -28,12 +35,20 @@ class NYTHomeTopStoriesViewController: UIViewController {
         
         setupUI()
         configure()
+        UtilityFunctions.showLoadingBlurViewNotification()
         
         fetchStoryData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.topBannerImageView.isHidden = true
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.topBannerImageView.isHidden = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -45,6 +60,8 @@ class NYTHomeTopStoriesViewController: UIViewController {
     func setupUI() {
         
         self.view.addSubview(storyCollectionView)
+        self.navigationController?.navigationBar.addSubview(topBannerImageView)
+        self.navigationController?.navigationBar.isTranslucent = false
         storyCollectionView.backgroundColor = UIColor.white
     }
     
@@ -52,6 +69,11 @@ class NYTHomeTopStoriesViewController: UIViewController {
         
         storyCollectionView.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalToSuperview().offset(0)
+        }
+        topBannerImageView.snp.makeConstraints { (make) in
+            make.center.equalTo((self.navigationController?.navigationBar.snp.center)!)
+            make.width.equalTo((self.navigationController?.navigationBar.snp.width)!).multipliedBy(2.0/3.0)
+            make.height.equalTo((self.navigationController?.navigationBar.snp.height)!).multipliedBy(2.0/3.0)
         }
     }
     

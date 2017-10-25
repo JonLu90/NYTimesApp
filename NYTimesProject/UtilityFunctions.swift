@@ -22,6 +22,18 @@ struct UtilityFunctions {
         alert.show()
     }
     
+    static func showLoadingBlurViewNotification() {
+        let alert = PCLBlurEffectAlertController(title: "Loading", message: "Be patient, your news is being loaded", effect: UIBlurEffect(style: .regular), style: .alert)
+        alert.configure(cornerRadius: 10)
+        alert.show()
+        
+        let when = DispatchTime.now() + 2
+        DispatchQueue.main.asyncAfter(deadline: when) { 
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+    }
+    
     static func convertDateFormat(_ dateString: String) -> String {
         
         let dateFormatterFrom = DateFormatter()
