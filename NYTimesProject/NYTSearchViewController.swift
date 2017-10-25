@@ -38,7 +38,7 @@ class NYTSearchViewController: UIViewController {
         print("story num: \(stories.count)")
     }
     
-    func fetchQueryData(query: String, page: Int) {
+    func fetchQueryData(query: String, page: Int, clearQueryFlag: Bool) {
         
         // async call!
         NetworkService.queryRequest(target: .articleSearch(["q": query, "page": page]), success: { [unowned self](response) in
@@ -49,9 +49,14 @@ class NYTSearchViewController: UIViewController {
             // map data model
             // and insert data into story array
             // but before fetch new query data
+            // if clearQueryFlag is set to true
             // clear story array first
-            
-            self.stories = []
+            // if clearQueryFlag is set to false
+            // this will set to infinit scroll, keep scrolling to next page
+            if clearQueryFlag == true {
+                self.stories = []
+                self.page = 0
+            }
             for result in results {
                 let story = SearchStory(JSON: result)!
                 story.thumbnailURL = JSONParser.parseSearchStoryThumbnail(dic: result)
@@ -59,8 +64,8 @@ class NYTSearchViewController: UIViewController {
                 self.stories.append(story)
             }
             self.searchCollectionView.reloadData()
-            print("story inside async: \(self.stories.count)")
-            print("query inside async: \(self.query)")
+            self.page = self.page + 1
+            print("page: \(self.page)")
             
         }) { (error) in
             UtilityFunctions.showAlert(error.errorDescription!)
@@ -155,13 +160,21 @@ extension NYTSearchViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         // TODO
+        if indexPath.section == 1 {
+            if indexPath.row == self.stories.count-1 || indexPath.row == self.stories.count-2 {
+                print("this is the end!")
+                fetchQueryData(query: self.query, page: self.page, clearQueryFlag: false)
+            }
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.query = textField.text!
+        fetchQueryData(query: self.query, page: self.page, clearQueryFlag: true)
         textField.resignFirstResponder()
-        fetchQueryData(query: self.query, page: 0)
-        self.query =  textField.text!
-        self.page = 0
+        if query.characters.count > 0 {
+            self.navigationItem.title = "Searching Topic: \(self.query)"
+        }
         return false
     }
 }

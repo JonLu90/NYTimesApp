@@ -92,6 +92,8 @@ class SearchCollectionViewCell: UICollectionViewCell {
     let thumbnailView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = UIColor.red
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
