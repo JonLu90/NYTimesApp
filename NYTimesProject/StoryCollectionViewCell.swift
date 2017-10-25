@@ -17,7 +17,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupUI()
-        self.contentView.backgroundColor = UIColor.purple
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -96,37 +95,31 @@ class StoryCollectionViewCell: UICollectionViewCell {
     // MARK: UI Properties
     let sectionLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor.blue
+        label.font = UIFont.boldSystemFont(ofSize: label.font.pointSize)
         label.textAlignment = .center
-        //label.text = "World"
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     let subSectionLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor.blue
         label.textAlignment = .center
-        //label.text = "Asia Pacific"
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor.blue
         label.textAlignment = .left
         label.minimumScaleFactor = 0.1
-        
+        label.font = UIFont.boldSystemFont(ofSize: label.font.pointSize)
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
-        //label.text = "She's 26, and Brought Down Uber's CEO. What's Next?"
         return label
     }()
     
     let dateLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor.blue
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         return label
@@ -134,7 +127,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
     
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = UIColor.blue
         return imageView
     }()
     

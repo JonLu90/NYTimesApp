@@ -15,7 +15,7 @@ class TextFieldHeaderCell: UICollectionViewCell {
         super.init(frame: frame)
         
         self.contentView.addSubview(searchTextField)
-        self.contentView.backgroundColor = UIColor.yellow
+        self.contentView.backgroundColor = UIColor.gray
         
     }
     

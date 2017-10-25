@@ -17,7 +17,6 @@ class SearchCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupUI()
-        self.backgroundColor = UIColor.blue
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,7 +43,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         thumbnailView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(4)
             make.right.equalToSuperview().offset(-4)
-            make.width.equalTo(contentView.snp.width).multipliedBy(1.0/2.0)
+            make.width.equalTo(contentView.snp.width).multipliedBy(1.0/2.2)
             make.height.equalTo(thumbnailView.snp.width).multipliedBy(1.0/2.0)
         }
         headlineLabel.snp.makeConstraints { (make) in
@@ -91,7 +90,6 @@ class SearchCollectionViewCell: UICollectionViewCell {
     // MARK: UI Properties
     let thumbnailView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = UIColor.red
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
@@ -99,17 +97,16 @@ class SearchCollectionViewCell: UICollectionViewCell {
     
     let headlineLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor.red
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .left
+        label.font = UIFont.boldSystemFont(ofSize: label.font.pointSize)
         label.minimumScaleFactor = 0.1
         return label
     }()
     
     let snippetLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor.red
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .left
@@ -122,7 +119,6 @@ class SearchCollectionViewCell: UICollectionViewCell {
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.1
         label.textAlignment = .center
-        label.backgroundColor = UIColor.red
         return label
     }()
     

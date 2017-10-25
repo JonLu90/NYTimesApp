@@ -81,6 +81,7 @@ class NYTSearchViewController: UIViewController {
     
     func setupUI() {
         self.view.addSubview(searchCollectionView)
+        self.navigationController?.navigationBar.isTranslucent = false
     }
     
     func setupConstraints() {
