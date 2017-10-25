@@ -17,7 +17,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupUI()
-        //setupConstraints()
         self.contentView.backgroundColor = UIColor.purple
     }
     
@@ -86,7 +85,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
             make.top.equalTo(subSectionLabel.snp.bottom).offset(2)
             make.left.equalToSuperview().offset(4)
             make.width.equalToSuperview().multipliedBy(1.0/2.0)
-            make.height.equalTo(self.contentView.snp.height).multipliedBy(1.0/2.0)
+            make.height.equalTo(self.contentView.snp.height).multipliedBy(2.0/3.5)
         }
         thumbnailImageView.snp.makeConstraints { (make) in
             make.right.equalToSuperview().offset(-4)

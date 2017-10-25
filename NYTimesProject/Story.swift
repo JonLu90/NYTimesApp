@@ -21,6 +21,7 @@ class Story: Mappable{
     
     required init?(map: Map) {}
     
+    // thumbnailURL CAN NOT be mapped
     func mapping(map: Map) {
         
             section  <- map["section"]
