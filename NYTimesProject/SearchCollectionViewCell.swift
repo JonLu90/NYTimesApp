@@ -66,6 +66,19 @@ class SearchCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func configureCell(story: SearchStory) {
+        headlineLabel.text = story.headline
+        snippetLabel.text = story.snippet
+        dateLabel.text = story.date
+        // some video news can be without thumbnail url
+        // for those display default nytimes logo
+        if let urlString = story.thumbnailURL {
+            thumbnailView.sd_setImage(with: URL(string: urlString), placeholderImage: UIImage(named: "news_placeholder"), options: [.continueInBackground, .progressiveDownload], completed: nil)
+        } else {
+            thumbnailView.image = UIImage(named: "nytimes_black")
+        }
+    }
+    
     // MARK: UI Properties
     let thumbnailView: UIImageView = {
         let imageView = UIImageView()

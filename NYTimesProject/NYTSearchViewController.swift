@@ -40,8 +40,25 @@ class NYTSearchViewController: UIViewController {
     
     func fetchQueryData(query: String, page: Int) {
         
-        NetworkService.queryRequest(target: .articleSearch(["q": query, "page": page]), success: { (response) in
-            print(try! response.mapJSON())
+        // async call!
+        NetworkService.queryRequest(target: .articleSearch(["q": query, "page": page]), success: { [unowned self](response) in
+            
+            let json = try! response.mapJSON() as! [String: Any]
+            let results = JSONParser.parseSearchResults(dic: json)
+            print("result number: \(results.count)")
+            
+            // map data model
+            for result in results {
+                let story = SearchStory(JSON: result)!
+                story.thumbnailURL = JSONParser.parseSearchStoryThumbnail(dic: result)
+                story.headline = JSONParser.parseSearchStoryHeadline(dic: result)
+                self.stories.append(story)
+                print(story.thumbnailURL)
+            }
+            self.searchCollectionView.reloadData()
+            print("story inside async: \(self.stories.count)")
+            print("query inside async: \(self.query)")
+            
         }) { (error) in
             print(error)
         }
@@ -85,7 +102,7 @@ extension NYTSearchViewController: UICollectionViewDelegate, UICollectionViewDat
             return 1
         }
         else {
-            return 20
+            return stories.count
         }
     }
     
@@ -110,6 +127,7 @@ extension NYTSearchViewController: UICollectionViewDelegate, UICollectionViewDat
             
         else {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableCellIdentifier, for: indexPath) as? SearchCollectionViewCell {
+                cell.configureCell(story: stories[indexPath.row])
                 return cell
             }
             else {

@@ -33,4 +33,27 @@ struct JSONParser {
         let json = JSON(dic)
         return json["last_updated"].string!
     }
+    
+    static func parseSearchResults(dic: [String: Any]) -> [[String: Any]] {
+        let json = JSON(dic)
+        let results = json["response"]["docs"].arrayObject as! [[String: Any]]
+        return results
+    }
+    
+    static let thumbnailBaseURL = "https://static01.nyt.com/"
+    static func parseSearchStoryThumbnail(dic: [String: Any]) -> String? {
+        let json = JSON(dic)
+        if let urlString = json["multimedia"][0]["url"].string {
+            return thumbnailBaseURL + urlString
+        } else {
+            return nil
+        }
+        
+    }
+    
+    static func parseSearchStoryHeadline(dic: [String: Any]) -> String {
+        let json = JSON(dic)
+        let headline = json["headline"]["main"].string!
+        return headline
+    }
 }

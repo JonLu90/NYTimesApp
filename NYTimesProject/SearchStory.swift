@@ -20,11 +20,12 @@ class SearchStory: Mappable {
     required init?(map: Map) {}
     
     // thumbnail URL CAN NOT be mapped
+    // And headline mapping always fail, still figuring out why
+    // for those 2 properties, use swiftyJson instead
     func mapping(map: Map) {
         
         webURL  <- map["web_url"]
        snippet  <- map["snippet"]
-      headline  <- map["main"]
           date  <- map["pub_date"]
     }
 }
